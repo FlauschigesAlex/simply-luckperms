@@ -1,0 +1,12 @@
+name: '${project.artifactId}'
+version: '${project.version}'
+api-version: '1.21.11'
+main: at.flauschigesalex.lucko.SimpleLuckoPlugin
+loader: at.flauschigesalex.lucko.loader.SimpleLuckoLoader
+
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: true
+      join-classpath: true
