@@ -25,7 +25,7 @@ Recommended Version: Paper 1.21.11 (or newer)
 ![color team minecraft](https://github.com/FlauschigesAlex/simply-luckperms/blob/branding/preview/color-team-mc.png?raw=true)<br>
 `color-team` *(meta field)* - Sets the holder's global team color (above player color). Limited to [NamedTextColor](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/NamedTextColor.html).
 <br>Defaults to `WHITE` if not set.
----
+<br><br>
 ![color waypoint](https://github.com/FlauschigesAlex/simply-luckperms/blob/branding/preview/color-waypoint.png?raw=true)<br>
 ![color waypoint minecraft](https://github.com/FlauschigesAlex/simply-luckperms/blob/branding/preview/color-waypoint-mc.png?raw=true)<br>
 **(1.21.11+)** `color-waypoint` *(meta field)* - Sets the holder's [waypoint](https://minecraft.wiki/w/Commands/waypoint) color in the [locator bar](https://minecraft.wiki/w/Locator_Bar). Limited to [NamedTextColor](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/NamedTextColor.html).
@@ -96,7 +96,7 @@ SimplyLuckPerms uses a configuration file to enable/disable features.
 LuckPerm's fields are based on `holders`, which are either players or groups.
 <br>The inheritance of a field is ordered by `player` -> `group (descending weight)`, this means a group's prefix can be overridden for a player by setting player's prefix at a higher weight.
 <br>This works the same for all builtin fields.
----
+<br><br>
 When working with meta-fields, LuckPerms will choose the first field it finds. (`player` -> `group (descending weight)`)
 <br>If a player has multiple meta-fields with the same key, a random one will be chosen.
 
