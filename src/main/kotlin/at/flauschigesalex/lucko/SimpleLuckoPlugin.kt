@@ -24,7 +24,7 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
         LuckPermsEvents // LOAD LUCKPERMS EVENTS
         
         // BEGIN BSTATS
-        val metrics = Metrics(this, 30820)
+        val metrics = Metrics(this, 31006)
 
         metrics.addCustomChart(SimplePie("server_brand") { Bukkit.getServer().name })
         metrics.addCustomChart(SimplePie("server_version") { Bukkit.getServer().minecraftVersion })
