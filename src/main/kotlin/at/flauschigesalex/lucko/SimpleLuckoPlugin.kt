@@ -2,6 +2,9 @@ package at.flauschigesalex.lucko
 
 import at.flauschigesalex.lib.minecraft.paper.base.FlauschigeLibraryPaper
 import at.flauschigesalex.lucko.luckperms.LuckPermsEvents
+import at.flauschigesalex.lucko.utils.scheduleAsync
+import at.flauschigesalex.lucko.version.VersionChecker
+import at.flauschigesalex.lucko.version.sendNewerVersionMessage
 import org.bstats.bukkit.Metrics
 import org.bstats.charts.SimplePie
 import org.bukkit.Bukkit
@@ -28,5 +31,14 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
 
         metrics.addCustomChart(SimplePie("server_brand") { Bukkit.getServer().name })
         metrics.addCustomChart(SimplePie("server_version") { Bukkit.getServer().minecraftVersion })
+        
+        // BEGIN VERSION CHECKER
+        scheduleAsync {
+            VersionChecker.checkVersion().onSuccess { changes ->
+                changes?.let { changes ->
+                    Bukkit.getConsoleSender().sendNewerVersionMessage(changes)
+                }
+            }.onFailure { it.printStackTrace() }
+        }
     }
 }
