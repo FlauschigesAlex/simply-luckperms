@@ -21,6 +21,7 @@ data class LuckPermsMetaPackage(
     @InternalMeta val tabNameColorOrNull: String?,
     @InternalMeta val chatNameColorOrNull: String?,
     @InternalMeta val chatColorOrNull: String?,
+    val chatColorRich: Boolean,
     @InternalMeta val teamColorOrNull: NamedTextColor?,
     private val waypointColorOrNull: TextColor?,
 ) {
@@ -38,6 +39,7 @@ data class LuckPermsMetaPackage(
         tabNameColorOrNull = user.getMeta("color-name-tab"),
         chatNameColorOrNull = user.getMeta("color-name-chat"),
         chatColorOrNull = user.getMeta("color-chat"),
+        chatColorRich = user.getMeta("color-chat-rich").toString().equals("true", true),
         teamColorOrNull = user.getMeta("color-team")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } },
         waypointColorOrNull = user.getMeta("color-waypoint")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } ?: TextColor.fromHexString(name) },
     )

@@ -43,6 +43,11 @@ Recommended Version: Paper 1.21.11 (or newer)
 `color-chat` *(meta field)* - Sets the holder's chat color. Supports [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/), [Message-Placeholder (%s)](https://www.w3schools.com/java/ref_string_format.asp).
 <br>Defaults to `WHITE` if not set.
 
+![color chat rich](https://github.com/FlauschigesAlex/simply-luckperms/blob/branding/preview/color-chat-rich.png?raw=true)<br>
+![color chat rich minecraft](https://github.com/FlauschigesAlex/simply-luckperms/blob/branding/preview/color-chat-rich-mc.png?raw=true)<br>
+`color-chat-rich` *(meta field)* - Sets whether the holder is allowed to use [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/).
+<br>Defaults to `false` if not set.
+
 ## Configuration file
 SimplyLuckPerms uses a configuration file to enable/disable features.
 <br>**If you want to make any changes to the config, create one at `plugins/simply-luckperms/config.json`.**

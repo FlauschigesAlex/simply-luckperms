@@ -31,8 +31,11 @@ private class LuckPermsListener : PaperListener() {
         val user = player.luckPermsUser ?: return
 
         val textComponent = event.originalMessage() as? TextComponent ?: return
-        val text = textComponent.content()
+        var text = textComponent.content()
         val meta = user.meta
+        
+        if (meta.chatColorRich.not())
+            text = MiniMessage.escapeTags(text)
         
         val prefix = meta.chatPrefix
         val suffix = meta.chatSuffix
