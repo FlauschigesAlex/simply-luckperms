@@ -6,7 +6,7 @@ It provides a simple and intuitive way to configure player prefixes, suffixes, t
 - [LuckPerms 5.4 (or newer)](https://luckperms.net/)
 
 ### Supported platforms and versions
-- [Paper](https://papermc.io/software/paper/) Versions: 1.21.10 - 1.21.11
+- [Paper](https://papermc.io/software/paper/) Versions: 1.21.10 - 26.1.2
 
 Recommended Version: Paper 1.21.11 (or newer)
 <br>Although simple-maintenance-plugin may work on other platforms or versions, I do not guarantee for their stability or functionality.
