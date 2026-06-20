@@ -27,10 +27,10 @@ public class SimpleLuckoLoader implements PluginLoader {
         classpathBuilder.addLibrary(rPaper);
 
         final var rFLX = new MavenLibraryResolver();
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-general:2.3.0"), null));
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-file:2.2.1"), null));
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.minecraft.paper:minecraft-paper-base:2.0.0"), null));
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.rinth:modrinth-api:1.0.0"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-general:2.3.1"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-file:3.0.0"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.minecraft.paper:minecraft-paper-base:2.0.2"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.rinth:modrinth-api:[2.0.0-rc.1,3.0.0)"), null));
 
         rFLX.addRepository(new RemoteRepository.Builder("flx-library", "default", "https://repo.flauschigesalex.at/repository/maven-public/")
                 .setReleasePolicy(policy)

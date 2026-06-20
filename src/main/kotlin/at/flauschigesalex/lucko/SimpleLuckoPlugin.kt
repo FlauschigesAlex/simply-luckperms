@@ -2,12 +2,13 @@ package at.flauschigesalex.lucko
 
 import at.flauschigesalex.lib.minecraft.paper.base.FlauschigeLibraryPaper
 import at.flauschigesalex.lucko.luckperms.LuckPermsEvents
+import at.flauschigesalex.lucko.utils.Commons
 import at.flauschigesalex.lucko.utils.scheduleAsync
-import at.flauschigesalex.lucko.version.VersionChecker
-import at.flauschigesalex.lucko.version.sendNewerVersionMessage
+import at.flauschigesalex.lucko.utils.sendNewerVersionMessage
+import at.flauschigesalex.rinth.project.version.checker.VersionChecker
+import at.flauschigesalex.rinth.project.version.listener.PaperVersionUpdateListener
+import at.flauschigesalex.rinth.project.version.onChanges
 import org.bstats.bukkit.Metrics
-import org.bstats.charts.SimplePie
-import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("UNUSED_EXPRESSION")
@@ -29,16 +30,14 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
         // BEGIN BSTATS
         val metrics = Metrics(this, 31006)
 
-        metrics.addCustomChart(SimplePie("server_brand") { Bukkit.getServer().name })
-        metrics.addCustomChart(SimplePie("server_version") { Bukkit.getServer().minecraftVersion })
-        
         // BEGIN VERSION CHECKER
-        scheduleAsync {
-            VersionChecker.checkVersion().onSuccess { changes ->
-                changes?.let { changes ->
-                    Bukkit.getConsoleSender().sendNewerVersionMessage(changes)
+        PaperVersionUpdateListener(this) { audience ->
+            scheduleAsync {
+                val changes = VersionChecker.check(Commons.slug).currentVersionDiff(server).getOrNull() ?: return@scheduleAsync
+                changes.onChanges {
+                    audience.sendNewerVersionMessage(this)
                 }
-            }.onFailure { it.printStackTrace() }
+            }
         }
     }
 }
