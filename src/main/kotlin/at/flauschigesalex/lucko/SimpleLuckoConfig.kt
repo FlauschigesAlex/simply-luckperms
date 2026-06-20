@@ -2,21 +2,28 @@ package at.flauschigesalex.lucko
 
 import at.flauschigesalex.lib.base.file.FileManager
 import at.flauschigesalex.lib.base.file.JsonManager
+import at.flauschigesalex.lib.base.file.ResourceManager
 import at.flauschigesalex.lib.base.file.readJson
 import at.flauschigesalex.lucko.utils.scheduleAsync
 
 object SimpleLuckoConfig {
     
+    private const val VERSION = 1
+    
     private val file: FileManager = FileManager(SimpleLuckoPlugin.instance.dataFolder, "config.json")
     private lateinit var json: JsonManager
     
     init {
+        this.attemptCreateConfig()
         this.reloadConfig()
     }
     
     fun reloadConfig() {
         json = file.readJson() ?: JsonManager()
     }
+    
+    internal val _configVersion: Int
+        get() = json.getInt("_version") ?: 1
     
     internal var internalNodeAwaitDelay: Long
         get() = json.getLong("config._node.awaitTick") ?: 5
@@ -69,5 +76,13 @@ object SimpleLuckoConfig {
         
         file.createFile()
         file.write(json)
+    }
+    
+    private fun attemptCreateConfig() {
+        if (file.exists) return
+        file.createFile()
+        
+        val defaultConfig = ResourceManager("default-config.json", javaClass.classLoader)?.readBytes() ?: return
+        file.write(defaultConfig)
     }
 }

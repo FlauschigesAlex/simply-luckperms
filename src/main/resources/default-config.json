@@ -1,0 +1,38 @@
+{
+  "config": {
+    "_version": 1,
+    "_node": {
+      "awaitTick": 5
+    },
+    "display": {
+      "chat": {
+        "use": true,
+        "format": "%prefix%%username%%suffix%<dark_gray>: %message%"
+      },
+      "name": {
+        "use": true
+      },
+      "tab": {
+        "use": true,
+        "format": "%prefix%%username%%suffix%"
+      },
+      "teams": {
+        "use": true
+      },
+      "waypoints": {
+        "use": true
+      }
+    },
+    "scoreboard": {
+      "private": {
+        "use": true
+      },
+      "prefix": {
+        "use": true
+      },
+      "suffix": {
+        "use": true
+      }
+    }
+  }
+}
