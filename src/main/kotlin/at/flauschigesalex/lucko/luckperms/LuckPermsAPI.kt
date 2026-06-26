@@ -1,6 +1,12 @@
 package at.flauschigesalex.lucko.luckperms
 
 import at.flauschigesalex.lucko.SimpleLuckoConfig
+import at.flauschigesalex.lucko.luckperms._events.SLPDisplayNameUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.SLPFieldAttemptUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.SLPPlayerListNameUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.SLPPlayerListOrderUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.SLPScoreboardTeamUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.UpdateField
 import at.flauschigesalex.lucko.utils.MiniMessage
 import at.flauschigesalex.lucko.utils.isMainScoreboard
 import net.luckperms.api.model.group.Group
@@ -52,6 +58,7 @@ object LuckPermsAPI {
     }
     fun attemptUpdatePlayerListOrder(player: Player, user: User) {
         if (SimpleLuckoConfig.useTabDisplay.not()) return
+        if (SLPFieldAttemptUpdateEvent(player, UpdateField.PLAYER_LIST_ORDER).callEvent().not()) return
         this.updatePlayerListOrder(player, user)
     }
 
@@ -61,6 +68,7 @@ object LuckPermsAPI {
     }
     fun attemptUpdatePlayerListName(player: Player, user: User) {
         if (SimpleLuckoConfig.useTabDisplay.not()) return
+        if (SLPFieldAttemptUpdateEvent(player, UpdateField.PLAYER_LIST_NAME).callEvent().not()) return
         this.updatePlayerListName(player, user)
     }
     
@@ -70,6 +78,7 @@ object LuckPermsAPI {
     }
     fun attemptUpdateDisplayName(player: Player, user: User) {
         if (SimpleLuckoConfig.useDisplayName.not()) return
+        if (SLPFieldAttemptUpdateEvent(player, UpdateField.DISPLAY_NAME).callEvent().not()) return
         this.updateDisplayName(player, user)
     }
 
@@ -79,6 +88,7 @@ object LuckPermsAPI {
     }
     fun attemptUpdateTeam(player: Player, user: User) {
         if (SimpleLuckoConfig.useScoreboardTeams.not()) return
+        if (SLPFieldAttemptUpdateEvent(player, UpdateField.SCOREBOARD_TEAM).callEvent().not()) return
         this.updateTeam(player, user)
     }
 
@@ -88,6 +98,7 @@ object LuckPermsAPI {
     }
     fun attemptUpdateWaypoint(player: Player, user: User) {
         if (SimpleLuckoConfig.useWaypointColor.not()) return
+        if (SLPFieldAttemptUpdateEvent(player, UpdateField.LOCATOR_BAR_WAYPOINT).callEvent().not()) return
         this.updateWaypoint(player, user)
     }
     
@@ -113,7 +124,8 @@ object LuckPermsAPI {
     fun updatePlayerListOrder() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListOrder(player, user) }
     private fun updatePlayerListOrder(player: Player, user: User) {
         val weight = user.cachedData.metaData.getMetaValue("weight")?.toIntOrNull() ?: 0
-        player.playerListOrder = weight
+        val event = SLPPlayerListOrderUpdateEvent(player, weight).apply { callEvent() }
+        player.playerListOrder = event.playerListOrderWeight
     }
 
     fun updatePlayerListNames() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListName(player, user) }
@@ -132,7 +144,9 @@ object LuckPermsAPI {
             .replace("%username%", username)
             .replace("%team-color%", "<color:${meta.teamColor.asHexString()}>")
 
-        val component = MiniMessage.deserialize(full)
+        val event = SLPPlayerListNameUpdateEvent(player, full).apply { callEvent() }
+
+        val component = MiniMessage.deserialize(event.richPlayerListName)
         player.playerListName(component)
     }
 
@@ -141,8 +155,9 @@ object LuckPermsAPI {
         val meta = user.meta
 
         val username = "<color:${meta.teamColor.asHexString()}>${player.name}"
+        val event = SLPDisplayNameUpdateEvent(player, username).apply { callEvent() }
 
-        val component = MiniMessage.deserialize(username)
+        val component = MiniMessage.deserialize(event.richDisplayName)
         player.displayName(component)
     }
 
@@ -154,16 +169,31 @@ object LuckPermsAPI {
         val group = user.mainGroup ?: return
         val meta = user.meta
         
-        val usePrefix = SimpleLuckoConfig.useScoreboardPrefix
-        val useSuffix = SimpleLuckoConfig.useScoreboardSuffix
+        var usePrefix = SimpleLuckoConfig.useScoreboardPrefix
+        var useSuffix = SimpleLuckoConfig.useScoreboardSuffix
+        
+        val event = SLPScoreboardTeamUpdateEvent(
+            player,
+            usePrefix,
+            useSuffix,
+            meta.teamColor,
+            meta.teamPrefix,
+            meta.teamSuffix,
+        ).apply { callEvent() }
+        
+        usePrefix = event.usePrefix
+        useSuffix = event.useSuffix
+        
+        val teamPrefix = MiniMessage.deserialize(event.richPrefix)
+        val teamSuffix = MiniMessage.deserialize(event.richSuffix)
         
         boards.forEach { board ->
             val team = board.getTeam(group.name) ?: board.registerNewTeam(group.name)
 
-            team.color(meta.teamColor)
-
-            if (usePrefix) team.prefix(MiniMessage.deserialize(meta.teamPrefix))
-            if (useSuffix) team.suffix(MiniMessage.deserialize(meta.teamSuffix))
+            team.color(event.color)
+            
+            if (usePrefix) team.prefix(teamPrefix)
+            if (useSuffix) team.suffix(teamSuffix)
 
             team.addPlayer(player)
         }
