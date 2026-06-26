@@ -5,12 +5,12 @@ import at.flauschigesalex.lucko.utils.MiniMessage
 import at.flauschigesalex.lucko.utils.isMainScoreboard
 import net.luckperms.api.model.group.Group
 import net.luckperms.api.model.user.User
-import net.luckperms.api.node.types.PermissionNode
 import org.bukkit.Bukkit
 import org.bukkit.Color
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.Scoreboard
 
+@Suppress("unused")
 object LuckPermsAPI {
     
     // LUCKPERMS IMPLEMENTATION
@@ -93,7 +93,7 @@ object LuckPermsAPI {
     
     // IMPLEMENTATION
 
-    private fun updateEverything() {
+    fun updateEverything() {
         Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) ->
             updatePlayerListOrder(player, user)
             updatePlayerListName(player, user)
@@ -102,7 +102,7 @@ object LuckPermsAPI {
         }
         updateTeams()
     }
-    private fun updateEverything(player: Player, user: User) {
+    fun updateEverything(player: Player, user: User) {
         updatePlayerListOrder(player, user)
         updatePlayerListName(player, user)
         updateWaypoint(player, user)
@@ -110,14 +110,14 @@ object LuckPermsAPI {
         updateDisplayName(player, user)
     }
 
-    private fun updatePlayerListOrder() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListOrder(player, user) }
+    fun updatePlayerListOrder() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListOrder(player, user) }
     private fun updatePlayerListOrder(player: Player, user: User) {
         val weight = user.cachedData.metaData.getMetaValue("weight")?.toIntOrNull() ?: 0
         player.playerListOrder = weight
     }
 
-    private fun updatePlayerListNames() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListName(player, user) }
-    private fun updatePlayerListName(player: Player, user: User) {
+    fun updatePlayerListNames() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListName(player, user) }
+    fun updatePlayerListName(player: Player, user: User) {
         val meta = user.meta
 
         val prefix = meta.tabPrefix
@@ -136,8 +136,8 @@ object LuckPermsAPI {
         player.playerListName(component)
     }
 
-    private fun updateDisplayNames() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListName(player, user) }
-    private fun updateDisplayName(player: Player, user: User) {
+    fun updateDisplayNames() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updatePlayerListName(player, user) }
+    fun updateDisplayName(player: Player, user: User) {
         val meta = user.meta
 
         val username = "<color:${meta.teamColor.asHexString()}>${player.name}"
@@ -146,8 +146,8 @@ object LuckPermsAPI {
         player.displayName(component)
     }
 
-    private fun updateTeams() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updateTeam(player, user) }
-    private fun updateTeam(player: Player, user: User) {
+    fun updateTeams() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updateTeam(player, user) }
+    fun updateTeam(player: Player, user: User) {
         val scoreboard = getScoreboard(player)
         val boards = if (scoreboard.isMainScoreboard) listOf(scoreboard) else Bukkit.getOnlinePlayers().map { getScoreboard(it) }
         
@@ -169,8 +169,8 @@ object LuckPermsAPI {
         }
     }
     
-    private fun updateWaypoints() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updateWaypoint(player, user) }
-    private fun updateWaypoint(player: Player, user: User) {
+    fun updateWaypoints() = Bukkit.getOnlinePlayers().userPaired().forEach { (player, user) -> updateWaypoint(player, user) }
+    fun updateWaypoint(player: Player, user: User) {
         val color = user.meta.waypointColor ?: return
         runCatching { // Change waypoint color => depends on the version
             player.waypointColor = Color.fromRGB(color.value())

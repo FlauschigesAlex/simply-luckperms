@@ -3,7 +3,7 @@ package at.flauschigesalex.lucko.utils
 import at.flauschigesalex.rinth.project.version.MProjectVersionDifference
 import net.kyori.adventure.audience.Audience
 
-object Commons {
+internal object Commons {
     const val slug = "simply-luckperms"
 }
 

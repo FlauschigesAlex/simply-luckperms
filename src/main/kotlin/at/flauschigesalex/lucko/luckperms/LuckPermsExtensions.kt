@@ -6,7 +6,7 @@ import net.luckperms.api.model.group.Group
 import net.luckperms.api.model.user.User
 import org.bukkit.entity.Player
 
-val LuckPerms = LuckPermsProvider.get()
+internal val LuckPerms = LuckPermsProvider.get()
 
 val Player.userPaired: Pair<Player, User?> 
     get() = Pair(this, this.luckPermsUser)

@@ -36,7 +36,7 @@ val Audience.locale: Locale get() = when (this) {
     else -> Locale.getDefault()
 }
 
-fun Audience.sendTranslated(key: String, vararg args: Any?, richConsumer: Audience.(String) -> String = { it }) {
+internal fun Audience.sendTranslated(key: String, vararg args: Any?, richConsumer: Audience.(String) -> String = { it }) {
     val translation = Translate.translate(key, this.locale)
     val richTranslation = richConsumer.invoke(this, translation)
     this.sendRichMessage("<dark_gray>› <gray>$richTranslation".format(*args))

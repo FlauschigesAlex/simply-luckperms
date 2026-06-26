@@ -6,8 +6,9 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.luckperms.api.model.PermissionHolder
 
+@ExposedCopyVisibility
 @OptIn(InternalMeta::class)
-data class LuckPermsMetaPackage(
+data class LuckPermsMetaPackage internal constructor(
     @InternalMeta val prefixOrNull: String?,
     @InternalMeta val tabPrefixOrNull: String?,
     @InternalMeta val chatPrefixOrNull: String?,
@@ -43,22 +44,22 @@ data class LuckPermsMetaPackage(
         teamColorOrNull = user.getMeta("color-team")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } },
         waypointColorOrNull = user.getMeta("color-waypoint")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } ?: TextColor.fromHexString(name) },
     )
-    
+
     val prefix: String = prefixOrNull ?: ""
     val suffix: String = suffixOrNull ?: ""
     val weight: Int = weightOrNull ?: 0
-    
+
     val chatColor: String = chatColorOrNull ?: "<white>%s"
     val teamColor: NamedTextColor = teamColorOrNull ?: NamedTextColor.WHITE
     val waypointColor: TextColor? = waypointColorOrNull ?: teamColorOrNull
-    
+
     val tabPrefix: String = tabPrefixOrNull ?: prefix
     val tabSuffix: String = tabSuffixOrNull ?: suffix
     val chatPrefix: String = chatPrefixOrNull ?: prefix
     val chatSuffix: String = chatSuffixOrNull ?: suffix
     val teamPrefix: String = teamPrefixOrNull ?: prefix
     val teamSuffix: String = teamSuffixOrNull ?: suffix
-    
+
     val tabNameColor = tabNameColorOrNull ?: nameColorOrNull ?: ""
     val chatNameColor = chatNameColorOrNull ?: nameColorOrNull ?: ""
 }

@@ -9,7 +9,7 @@ import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.repository.RepositoryPolicy;
 
 @SuppressWarnings({"UnstableApiUsage", "unused"})
-public class SimpleLuckoLoader implements PluginLoader {
+class SimpleLuckoLoader implements PluginLoader {
 
     @Override
     public void classloader(PluginClasspathBuilder classpathBuilder) {

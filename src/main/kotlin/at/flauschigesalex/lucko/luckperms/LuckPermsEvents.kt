@@ -14,7 +14,7 @@ import net.luckperms.api.node.Node
 import net.luckperms.api.node.types.*
 import org.bukkit.Bukkit
 
-object LuckPermsEvents {
+internal object LuckPermsEvents {
     init {
         val plugin = SimpleLuckoPlugin.instance
         
