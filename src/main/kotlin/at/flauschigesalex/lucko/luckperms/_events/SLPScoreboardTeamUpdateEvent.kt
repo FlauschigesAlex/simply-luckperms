@@ -7,6 +7,12 @@ import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList
 
 @Suppress("unused")
+/**
+ * Called when a scoreboard team is updated for a player.
+ * @param color The display color of the team.
+ * @see net.kyori.adventure.text.minimessage.MiniMessage
+ * @see NamedTextColor
+ */
 class SLPScoreboardTeamUpdateEvent internal constructor(
     player: Player,
     var usePrefix: Boolean,

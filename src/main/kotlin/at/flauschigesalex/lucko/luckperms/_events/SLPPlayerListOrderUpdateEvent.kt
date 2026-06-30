@@ -6,6 +6,10 @@ import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList
 
 @Suppress("unused")
+/**
+ * Called when the player list order of a player is updated.
+ * @param playerListOrderWeight The player list order weight of the player.
+ */
 class SLPPlayerListOrderUpdateEvent internal constructor(
     player: Player,
     var playerListOrderWeight: Int,

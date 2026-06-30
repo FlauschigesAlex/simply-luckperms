@@ -7,6 +7,11 @@ import org.bukkit.event.Cancellable
 import org.bukkit.event.HandlerList
 
 @Suppress("unused")
+/**
+ * Called when the plugin attempts to update a field.
+ * @param field The field that is being attempted to update.
+ * @see UpdateField
+ */
 class SLPFieldAttemptUpdateEvent internal constructor(
     player: Player,
     val field: UpdateField
