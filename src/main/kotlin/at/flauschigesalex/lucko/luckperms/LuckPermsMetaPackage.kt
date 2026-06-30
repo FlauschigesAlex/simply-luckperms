@@ -64,6 +64,9 @@ data class LuckPermsMetaPackage internal constructor(
     val chatNameColor = chatNameColorOrNull ?: nameColorOrNull ?: ""
 }
 
+/**
+ * Resolved [Simply LuckPerms](https://modrinth.com/plugin/simply-luckperms) meta package for this permission holder.
+ */
 val PermissionHolder.meta: LuckPermsMetaPackage
     get() = LuckPermsMetaPackage(this)
 

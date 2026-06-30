@@ -10,15 +10,34 @@ import org.bukkit.event.HandlerList
 /**
  * Called when a scoreboard team is updated for a player.
  * @param color The display color of the team.
- * @see net.kyori.adventure.text.minimessage.MiniMessage
+ * @see [MiniMessage](https://docs.advntr.dev/minimessage/index.html)
  * @see NamedTextColor
  */
 class SLPScoreboardTeamUpdateEvent internal constructor(
     player: Player,
+    /**
+     * Whether the scoreboard team prefix should be applied.
+     */
     var usePrefix: Boolean,
+
+    /**
+     * Whether the scoreboard team suffix should be applied.
+     */
     var useSuffix: Boolean,
+
+    /**
+     * Team color that will be applied.
+     */
     var color: NamedTextColor,
+
+    /**
+     * Rich [MiniMessage](https://docs.advntr.dev/minimessage/index.html) team prefix that will be applied.
+     */
     var richPrefix: String,
+
+    /**
+     * Rich [MiniMessage](https://docs.advntr.dev/minimessage/index.html) team suffix that will be applied.
+     */
     var richSuffix: String,
 ) : SLPUpdateEvent(player) {
 

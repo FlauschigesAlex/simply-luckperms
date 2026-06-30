@@ -9,10 +9,13 @@ import org.bukkit.event.HandlerList
 /**
  * Called when the player list name of a player is updated.
  * @param richPlayerListName The rich player list name of the player.
- * @see [net.kyori.adventure.text.minimessage.MiniMessage]
+ * @see [MiniMessage](https://docs.advntr.dev/minimessage/index.html)
  */
 class SLPPlayerListNameUpdateEvent internal constructor(
     player: Player,
+    /**
+     * Rich [MiniMessage](https://docs.advntr.dev/minimessage/index.html) player list name that will be applied.
+     */
     var richPlayerListName: String,
 ) : SLPUpdateEvent(player) {
 

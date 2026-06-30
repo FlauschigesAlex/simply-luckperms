@@ -14,6 +14,9 @@ import org.bukkit.event.HandlerList
  */
 class SLPFieldAttemptUpdateEvent internal constructor(
     player: Player,
+    /**
+     * Field that is about to be updated.
+     */
     val field: UpdateField
 ) : SLPUpdateEvent(player), Cancellable {
 

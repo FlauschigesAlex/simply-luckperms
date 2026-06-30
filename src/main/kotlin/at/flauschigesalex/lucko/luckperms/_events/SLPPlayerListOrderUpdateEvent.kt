@@ -12,6 +12,9 @@ import org.bukkit.event.HandlerList
  */
 class SLPPlayerListOrderUpdateEvent internal constructor(
     player: Player,
+    /**
+     * Player list order weight that will be applied.
+     */
     var playerListOrderWeight: Int,
 ) : SLPUpdateEvent(player) {
 
