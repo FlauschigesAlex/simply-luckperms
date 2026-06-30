@@ -6,6 +6,7 @@ import at.flauschigesalex.lucko.luckperms._events.SLPFieldAttemptUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.SLPPlayerListNameUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.SLPPlayerListOrderUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.SLPScoreboardTeamUpdateEvent
+import at.flauschigesalex.lucko.luckperms._events.SLPWaypointUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.UpdateField
 import at.flauschigesalex.lucko.utils.MiniMessage
 import at.flauschigesalex.lucko.utils.isMainScoreboard
@@ -203,7 +204,9 @@ object LuckPermsAPI {
     fun updateWaypoint(player: Player, user: User) {
         val color = user.meta.waypointColor ?: return
         runCatching { // Change waypoint color => depends on the version
-            player.waypointColor = Color.fromRGB(color.value())
+            val color = Color.fromRGB(color.value())
+            val event = SLPWaypointUpdateEvent(player, color).apply { callEvent() }
+            player.waypointColor = event.color
         }
     }
     
