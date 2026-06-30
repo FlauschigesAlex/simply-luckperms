@@ -6,6 +6,7 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
 
+@Suppress("unused")
 internal object Translate {
     
     fun translate(key: String, locale: Locale): String = runCatching {
@@ -31,7 +32,7 @@ internal object Translate {
     }
 }
 
-val Audience.locale: Locale get() = when (this) {
+internal val Audience.locale: Locale get() = when (this) {
     is Player -> this.locale()
     else -> Locale.getDefault()
 }

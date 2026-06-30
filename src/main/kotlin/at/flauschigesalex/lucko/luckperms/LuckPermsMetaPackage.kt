@@ -26,7 +26,7 @@ data class LuckPermsMetaPackage internal constructor(
     @InternalMeta val teamColorOrNull: NamedTextColor?,
     private val waypointColorOrNull: TextColor?,
 ) {
-    constructor(user: PermissionHolder) : this(
+    internal constructor(user: PermissionHolder) : this(
         prefixOrNull = user.getMeta("prefix"),
         tabPrefixOrNull = user.getMeta("prefix-tab"),
         chatPrefixOrNull = user.getMeta("prefix-chat"),

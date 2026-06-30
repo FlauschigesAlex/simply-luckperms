@@ -6,7 +6,7 @@
 
     <groupId>at.flauschigesalex.lucko</groupId>
     <artifactId>simply-luckperms</artifactId>
-    <version>1.4.0-a4</version>
+    <version>1.4.0-a5</version>
 
     <properties>
         <kotlin.version>2.3.20</kotlin.version>

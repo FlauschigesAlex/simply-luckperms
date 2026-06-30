@@ -6,20 +6,20 @@ import net.luckperms.api.model.group.Group
 import net.luckperms.api.model.user.User
 import org.bukkit.entity.Player
 
-internal val LuckPerms = LuckPermsProvider.get()
+val LuckPerms = LuckPermsProvider.get()
 
-val Player.userPaired: Pair<Player, User?> 
+internal val Player.userPaired: Pair<Player, User?>
     get() = Pair(this, this.luckPermsUser)
 
-fun Iterable<Player>.userPaired(): List<Pair<Player, User>> = this.mapNotNull { i -> i.luckPermsUser?.let { i to it } }
-fun Iterable<Player>.userPairedNullable(): List<Pair<Player, User?>> = this.map { it to it.luckPermsUser }
 /**
  * Pairs every player in this iterable with its loaded [LuckPerms](https://luckperms.net/wiki/Developer-API) user and drops players without a loaded user.
  */
+internal fun Iterable<Player>.userPaired(): List<Pair<Player, User>> = this.mapNotNull { i -> i.luckPermsUser?.let { i to it } }
 
 /**
  * Pairs every player in this iterable with its loaded [LuckPerms](https://luckperms.net/wiki/Developer-API) user, preserving players without a loaded user.
  */
+internal fun Iterable<Player>.userPairedNullable(): List<Pair<Player, User?>> = this.map { it to it.luckPermsUser }
 
 /**
  * Loaded [LuckPerms](https://luckperms.net/wiki/Developer-API) user for this player, or `null` when LuckPerms has not loaded it.
