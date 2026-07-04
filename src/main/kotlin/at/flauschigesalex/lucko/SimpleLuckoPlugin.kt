@@ -5,9 +5,9 @@ import at.flauschigesalex.lucko.luckperms.LuckPermsEvents
 import at.flauschigesalex.lucko.utils.Commons
 import at.flauschigesalex.lucko.utils.scheduleAsync
 import at.flauschigesalex.lucko.utils.sendNewerVersionMessage
-import at.flauschigesalex.rinth.project.version.checker.VersionChecker
 import at.flauschigesalex.rinth.project.version.listener.PaperVersionUpdateListener
 import at.flauschigesalex.rinth.project.version.onChanges
+import at.flauschigesalex.rinth.utils.checker.version.VersionChecker
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -33,7 +33,7 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
         // BEGIN VERSION CHECKER
         PaperVersionUpdateListener(this) { audience ->
             scheduleAsync {
-                val changes = VersionChecker.check(Commons.slug).currentVersionDiff(server).getOrNull() ?: return@scheduleAsync
+                val changes = VersionChecker.check(Commons.slug, this.channel).currentVersionDiff(server).getOrNull() ?: return@scheduleAsync
                 changes.onChanges {
                     audience.sendNewerVersionMessage(this)
                 }

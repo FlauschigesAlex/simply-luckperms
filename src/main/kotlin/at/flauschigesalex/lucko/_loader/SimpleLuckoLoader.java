@@ -1,4 +1,4 @@
-package at.flauschigesalex.lucko.loader;
+package at.flauschigesalex.lucko._loader;
 
 import io.papermc.paper.plugin.loader.PluginClasspathBuilder;
 import io.papermc.paper.plugin.loader.PluginLoader;
@@ -16,7 +16,7 @@ class SimpleLuckoLoader implements PluginLoader {
         final var policy = new RepositoryPolicy(true, RepositoryPolicy.UPDATE_POLICY_ALWAYS, RepositoryPolicy.CHECKSUM_POLICY_FAIL);
         
         final var rPaper = new MavenLibraryResolver();
-        rPaper.addDependency(new Dependency(new DefaultArtifact("org.jetbrains.kotlin:kotlin-stdlib:2.3.20"), null));
+        rPaper.addDependency(new Dependency(new DefaultArtifact("org.jetbrains.kotlin:kotlin-stdlib:2.3.21"), null));
         rPaper.addDependency(new Dependency(new DefaultArtifact("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"), null));
 
         rPaper.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/")
@@ -27,10 +27,10 @@ class SimpleLuckoLoader implements PluginLoader {
         classpathBuilder.addLibrary(rPaper);
 
         final var rFLX = new MavenLibraryResolver();
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-general:2.3.1"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-general:2.4.0"), null));
         rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.base:default-file:3.0.0"), null));
         rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.lib.minecraft.paper:minecraft-paper-base:2.0.2"), null));
-        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.rinth:modrinth-api:[2.0.0-rc.2,3.0.0)"), null));
+        rFLX.addDependency(new Dependency(new DefaultArtifact("at.flauschigesalex.rinth:modrinth-api:2.0.0"), null));
 
         rFLX.addRepository(new RemoteRepository.Builder("flx-library", "default", "https://repo.flauschigesalex.at/repository/maven-public/")
                 .setReleasePolicy(policy)

@@ -1,9 +1,9 @@
 package at.flauschigesalex.lucko
 
 import at.flauschigesalex.lib.base.file.FileManager
-import at.flauschigesalex.lib.base.file.JsonManager
+import at.flauschigesalex.lib.base.file.json.JsonManager
 import at.flauschigesalex.lib.base.file.ResourceManager
-import at.flauschigesalex.lib.base.file.readJson
+import at.flauschigesalex.lib.base.file.json.readJson
 import at.flauschigesalex.lucko.utils.scheduleAsync
 
 object SimpleLuckoConfig {
