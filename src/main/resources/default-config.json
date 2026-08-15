@@ -7,14 +7,14 @@
     "display": {
       "chat": {
         "use": true,
-        "format": "%prefix%%username%%suffix%<dark_gray>: %message%"
+        "format": "%prefix%%username%%suffix%<reset><dark_gray>: %message%"
       },
       "name": {
         "use": true
       },
       "tab": {
         "use": true,
-        "format": "%prefix%%username%%suffix%"
+        "format": "%prefix%%username%%suffix%<reset>"
       },
       "teams": {
         "use": true

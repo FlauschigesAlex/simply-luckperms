@@ -1,7 +1,6 @@
 package at.flauschigesalex.lucko.luckperms
 
-import at.flauschigesalex.lib.minecraft.paper.base.utils.Paper
-import at.flauschigesalex.lib.minecraft.paper.base.utils.Paper.name
+import at.flauschigesalex.lib.minecraft.paper.base.utils.name
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.luckperms.api.model.PermissionHolder
@@ -41,8 +40,8 @@ data class LuckPermsMetaPackage internal constructor(
         chatNameColorOrNull = user.getMeta("color-name-chat"),
         chatColorOrNull = user.getMeta("color-chat"),
         chatColorRich = user.getMeta("color-chat-rich").toString().equals("true", true),
-        teamColorOrNull = user.getMeta("color-team")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } },
-        waypointColorOrNull = user.getMeta("color-waypoint")?.let { name -> Paper.getNamedTextColorValues().find { it.name.equals(name, true) } ?: TextColor.fromHexString(name) },
+        teamColorOrNull = user.getMeta("color-team")?.let { name -> NamedTextColor.NAMES.values().find { it.name.equals(name, true) } },
+        waypointColorOrNull = user.getMeta("color-waypoint")?.let { name -> NamedTextColor.NAMES.values().find { it.name.equals(name, true) } ?: TextColor.fromHexString(name) },
     )
 
     val prefix: String = prefixOrNull ?: ""

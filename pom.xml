@@ -6,10 +6,10 @@
 
     <groupId>at.flauschigesalex.lucko</groupId>
     <artifactId>simply-luckperms</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
 
     <properties>
-        <kotlin.version>2.3.21</kotlin.version>
+        <kotlin.version>2.4.10</kotlin.version>
         <java.version>21</java.version>
     </properties>
     
@@ -66,28 +66,24 @@
         <dependency>
             <groupId>at.flauschigesalex.lib.base</groupId>
             <artifactId>default-general</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>2.5.0</version>
         </dependency>
         <dependency>
             <groupId>at.flauschigesalex.lib.base</groupId>
             <artifactId>default-file</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>at.flauschigesalex.lib.minecraft.paper</groupId>
             <artifactId>minecraft-paper-base</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
+            <version>3.2.1</version>
         </dependency>
         
         <!-- RINTH -->
         <dependency>
             <groupId>at.flauschigesalex.rinth</groupId>
             <artifactId>modrinth-version-api</artifactId>
-            <version>1.0.0</version>
-            <scope>provided</scope>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
@@ -118,8 +114,12 @@
                 <configuration>
                     <relocations>
                         <relocation>
+                            <pattern>at.flauschigesalex.lib</pattern>
+                            <shadedPattern>at.flauschigesalex.lucko._lib</shadedPattern>
+                        </relocation>
+                        <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>at.flauschigesalex.lucko</shadedPattern>
+                            <shadedPattern>at.flauschigesalex.lucko.bStats</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
