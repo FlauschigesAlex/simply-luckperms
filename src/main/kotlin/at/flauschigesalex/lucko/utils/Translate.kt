@@ -8,6 +8,15 @@ import java.util.*
 
 @Suppress("unused")
 internal object Translate {
+
+    val description: String = """
+        <b><#b3fffe>Simply<aqua>Luck<dark_aqua>Perms<reset>
+        <gray>A plugin designed to easily manage chat, tab and team display using only meta-fields.
+        
+        <gray>Learn more on <dark_green>Modrinth<gray>:
+        <dark_green><u>https://modrinth.com/plugin/simply-luckperms</u>
+        """.trimIndent()
+    val name: String = "<hover:show_text:\"$description\"><b><#b3fffe>Simply<aqua>L<dark_aqua>P<reset><reset>"
     
     fun translate(key: String, locale: Locale): String = runCatching {
         
@@ -40,5 +49,5 @@ internal val Audience.locale: Locale get() = when (this) {
 internal fun Audience.sendTranslated(key: String, vararg args: Any?, richConsumer: Audience.(String) -> String = { it }) {
     val translation = Translate.translate(key, this.locale)
     val richTranslation = richConsumer.invoke(this, translation)
-    this.sendRichMessage("<dark_gray>› <gray>$richTranslation".format(*args))
+    this.sendRichMessage("${Translate.name} <dark_gray>» <gray>$richTranslation".format(*args))
 }

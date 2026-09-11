@@ -9,6 +9,7 @@ import at.flauschigesalex.rinth.project.version.listener.PaperVersionUpdateListe
 import at.flauschigesalex.rinth.project.version.onChanges
 import at.flauschigesalex.rinth.utils.checker.version.VersionChecker
 import org.bstats.bukkit.Metrics
+import org.bstats.charts.AdvancedPie
 import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("UNUSED_EXPRESSION")
@@ -29,6 +30,19 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
         
         // BEGIN BSTATS
         val metrics = Metrics(this, 31006)
+        
+        metrics.addCustomChart(AdvancedPie("enabled_features") {
+            buildMap {
+                if (SimpleLuckoConfig.useChatDisplay) put("Chat", 1)
+                if (SimpleLuckoConfig.useDisplayName) put("DisplayNames", 1)
+                if (SimpleLuckoConfig.useTabDisplay) put("PlayerList", 1)
+                if (SimpleLuckoConfig.useScoreboardTeams) put("ScoreboardTeams", 1)
+                if (SimpleLuckoConfig.useWaypointColor) put("Waypoints", 1)
+                if (SimpleLuckoConfig.usePrivateScoreboard) put("PrivateScoreboards", 1)
+                if (SimpleLuckoConfig.useScoreboardPrefix) put("ScoreboardPrefix", 1)
+                if (SimpleLuckoConfig.useScoreboardSuffix) put("ScoreboardSuffix", 1)
+            }
+        })
 
         // BEGIN VERSION CHECKER
         PaperVersionUpdateListener(this) { audience ->

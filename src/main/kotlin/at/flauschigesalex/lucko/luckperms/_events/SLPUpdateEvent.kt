@@ -1,5 +1,6 @@
 package at.flauschigesalex.lucko.luckperms._events
 
+import at.flauschigesalex.lucko.luckperms.LuckPermsAPI
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerEvent
@@ -11,31 +12,47 @@ abstract class SLPUpdateEvent internal constructor(player: Player) : PlayerEvent
  * Display field targeted by a Simply LuckPerms update attempt.
  */
 @Suppress("unused")
-enum class UpdateField {
+enum class UpdateField(
+    private val invocation: () -> Unit
+) {
+    
     /**
      * Player list order weight.
      */
-    PLAYER_LIST_ORDER,
+    PLAYER_LIST_ORDER({
+        LuckPermsAPI.attemptUpdatePlayerListOrder()
+    }),
 
     /**
      * Player list display name.
      */
-    PLAYER_LIST_NAME,
+    PLAYER_LIST_NAME({
+        LuckPermsAPI.attemptUpdatePlayerListNames()
+    }),
 
     /**
      * Bukkit display name.
      */
-    DISPLAY_NAME,
+    DISPLAY_NAME({
+        LuckPermsAPI.attemptUpdateDisplayNames()
+    }),
 
     /**
      * Scoreboard team.
      */
-    SCOREBOARD_TEAM,
+    SCOREBOARD_TEAM({
+        LuckPermsAPI.attemptUpdateTeams()
+    }),
 
     /**
      * Locator bar waypoint color.
      */
-    LOCATOR_BAR_WAYPOINT,
+    LOCATOR_BAR_WAYPOINT({
+        LuckPermsAPI.attemptUpdateWaypoints()
+    }),
+    ;
+    
+    internal operator fun invoke() = invocation()
 }
 
 @RequiresOptIn("Abstract or unused event class.")

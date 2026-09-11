@@ -2,6 +2,10 @@
 A plugin designed to easily manage chat, tab and team display using only meta-fields.<br>
 It provides a simple and intuitive way to configure player prefixes, suffixes, team colors and more without the need for complex configuration files, just luckperms builtin- and meta-fields.
 
+### Download
+You may download the latest (release) version from [Modrinth](https://modrinth.com/plugin/simply-luckperms/versions).
+<br>**Make sure to always use the latest version to ensure stability, functionality and security.**
+
 ### Required Plugins
 - [LuckPerms 5.4 (or newer)](https://luckperms.net/)
 
@@ -96,7 +100,9 @@ SimplyLuckPerms uses a configuration file to enable/disable features.
 ### REMOVE COMMENTS BEFORE APPLYING CONFIG
 
 ## Commands
-`/slp-config reload` - Reloads the configuration file. (Permission `slp.config`)
+`/slp-config reload` - Reloads the configuration file. (Permission `slp.config`)<br>
+`/slp-reload <field>` - Reloads the provided display field. (Permission `slp.reload`)<br>
+`/slp-docs` - Displays a link to the latest documentation for simply-luckperms. (No permission required)
 
 ## Builtin Fields & Meta Fields
 LuckPerm's fields are based on `holders`, which are either players or groups.
@@ -118,3 +124,27 @@ Overrides can be used to modify specific fields for a holder such as their chat 
 `suffix-chat` *(meta field)* - Overrides the holder's chat suffix. Supports [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/).
 <br>`suffix-tab` *(meta field)* - Overrides the holder's tab (playerlist) suffix. Supports [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/).
 <br>`suffix-team` *(meta field)* - Overrides the holder's scoreboard team suffix. Supports [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/).
+
+## Developer API
+### Only available for version 1.4.0 or newer!
+Simply-LuckPerms supports modifications through external plugins using this provided library.
++ [Learn more the library](https://github.com/FlauschigesAlex/simply-luckperms/releases/tag/v1.4.0)
++ [Learn more about version 1.4.0](https://modrinth.com/plugin/simply-luckperms/version/1.4.0)
+
+### Maven
+Repository: 
+```xml
+<repository>
+    <id>simply-luckperms</id>
+    <url>https://repo.flauschigesalex.at/repository/maven-public/</url>
+</repository>
+```
+
+Dependency:
+```xml
+<dependency>
+    <groupId>at.flauschigesalex.lucko</groupId>
+    <artifactId>simply-luckperms</artifactId>
+    <version>VERSION</version>
+</dependency>
+```
