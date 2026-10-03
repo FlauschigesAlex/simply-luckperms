@@ -1,6 +1,6 @@
 package at.flauschigesalex.lucko.luckperms
 
-import at.flauschigesalex.lucko.SimpleLuckoConfig
+import at.flauschigesalex.lucko.config.SimpleLuckoConfig
 import at.flauschigesalex.lucko.luckperms._events.SLPDisplayNameUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.SLPFieldAttemptUpdateEvent
 import at.flauschigesalex.lucko.luckperms._events.SLPPlayerListNameUpdateEvent
@@ -16,6 +16,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Color
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.Scoreboard
+import org.bukkit.scoreboard.Team
 
 /**
  * Public API for applying [LuckPerms](https://luckperms.net/wiki/Developer-API) meta to Bukkit player displays.
@@ -382,6 +383,9 @@ object LuckPermsAPI {
             
             if (usePrefix) team.prefix(teamPrefix)
             if (useSuffix) team.suffix(teamSuffix)
+            
+            if (SimpleLuckoConfig.companionVisibility.displayOthers)
+                team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER)
 
             team.addPlayer(player)
         }

@@ -3,7 +3,7 @@
 package at.flauschigesalex.lucko.luckperms
 
 import at.flauschigesalex.lib.minecraft.paper.base.internal.PaperListener
-import at.flauschigesalex.lucko.SimpleLuckoConfig
+import at.flauschigesalex.lucko.config.SimpleLuckoConfig
 import at.flauschigesalex.lucko.utils.MiniMessage
 import at.flauschigesalex.lucko.utils.delayTick
 import io.papermc.paper.event.player.AsyncChatEvent

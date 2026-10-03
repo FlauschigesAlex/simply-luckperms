@@ -1,14 +1,16 @@
-package at.flauschigesalex.lucko
+package at.flauschigesalex.lucko.config
 
 import at.flauschigesalex.lib.base.file.FileManager
-import at.flauschigesalex.lib.base.file.json.JsonManager
 import at.flauschigesalex.lib.base.file.ResourceManager
+import at.flauschigesalex.lib.base.file.json.JsonManager
 import at.flauschigesalex.lib.base.file.json.readJson
+import at.flauschigesalex.lucko.SimpleLuckoPlugin
+import at.flauschigesalex.lucko.luckperms.companion.PlayerCompanionVisibility
 import at.flauschigesalex.lucko.utils.scheduleAsync
 
 object SimpleLuckoConfig {
     
-    private const val VERSION = 1
+    private const val VERSION = 2
     
     private val file: FileManager = FileManager(SimpleLuckoPlugin.instance.dataFolder, "config.json")
     private lateinit var json: JsonManager
@@ -16,6 +18,7 @@ object SimpleLuckoConfig {
     init {
         this.attemptCreateConfig()
         this.reloadConfig()
+        this.attemptUpdateConfig()
     }
     
     /**
@@ -25,8 +28,9 @@ object SimpleLuckoConfig {
         json = file.readJson() ?: JsonManager()
     }
     
-    internal val _configVersion: Int
-        get() = json.getInt("_version") ?: 1
+    internal var _configVersion: Int
+        get() = json.getInt("config._version") ?: 1
+        private set(value) { json.set("config._version", value) }
     
     internal var internalNodeAwaitDelay: Long
         get() = json.getLong("config._node.awaitTick") ?: 5
@@ -103,6 +107,13 @@ object SimpleLuckoConfig {
         set(value) { json.set("config.scoreboard.suffix.use", value) }
 
     /**
+     * Whether above player names should be overridden.
+     */
+    var companionVisibility: PlayerCompanionVisibility
+        get() = json.getEnum<PlayerCompanionVisibility>("config.companion.visibility") ?: PlayerCompanionVisibility.VANILLA
+        set(value) { json.set("config.companion.visibility", value) }
+
+    /**
      * Saves the current configuration if it has changed.
      *
      * @param async Whether the save should be scheduled asynchronously.
@@ -122,5 +133,16 @@ object SimpleLuckoConfig {
         
         val defaultConfig = ResourceManager("default-config.json", javaClass.classLoader)?.readBytes() ?: return
         file.write(defaultConfig)
+    }
+    
+    private fun attemptUpdateConfig() {
+        if (_configVersion >= VERSION) return
+        
+        if (_configVersion == 1) {
+            companionVisibility = PlayerCompanionVisibility.VANILLA
+            _configVersion++
+        }
+        
+        this.saveConfig(true)
     }
 }

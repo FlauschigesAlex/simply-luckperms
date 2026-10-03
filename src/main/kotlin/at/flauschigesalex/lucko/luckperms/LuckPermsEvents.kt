@@ -1,7 +1,7 @@
 package at.flauschigesalex.lucko.luckperms
 
-import at.flauschigesalex.lucko.SimpleLuckoConfig
 import at.flauschigesalex.lucko.SimpleLuckoPlugin
+import at.flauschigesalex.lucko.config.SimpleLuckoConfig
 import at.flauschigesalex.lucko.utils.delayTick
 import at.flauschigesalex.lucko.utils.scheduleSync
 import net.luckperms.api.event.group.GroupDataRecalculateEvent

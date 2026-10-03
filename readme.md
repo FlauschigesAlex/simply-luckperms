@@ -10,11 +10,11 @@ You may download the latest (release) version from [Modrinth](https://modrinth.c
 - [LuckPerms 5.4 (or newer)](https://luckperms.net/)
 
 ### Supported platforms and versions
-- [Paper](https://papermc.io/software/paper/) Versions: 1.21.10 - 26.2
-- [PurpurMC](https://purpurmc.org/) Versions: 1.21.10 - 26.2
+- [Paper](https://papermc.io/software/paper/) Versions: 1.21.10 - 26.3
+- [PurpurMC](https://purpurmc.org/) Versions: 1.21.10 - 26.3
 
 Recommended Version: Paper 1.21.11 (or newer)
-<br>Although simple-maintenance-plugin may work on other platforms or versions, I do not guarantee for their stability or functionality.
+<br>Although simply-luckperms may work on other platforms or versions, I do not guarantee for their stability or functionality.
 
 ## Setup
 ### Prefix Setup
@@ -56,13 +56,20 @@ Recommended Version: Paper 1.21.11 (or newer)
 ## Configuration file
 SimplyLuckPerms uses a configuration file to enable/disable features.
 <br>**If you want to make any changes to the config, create one at `plugins/simply-luckperms/config.json`.**
-<br>By default, all features are enabled, you can disable them by setting the corresponding option to `false` in the configuration file.
+<br>By default, all features are enabled; you can disable them by setting the corresponding option to `false` in the configuration file.
 ### REMOVE COMMENTS BEFORE APPLYING CONFIG
+
 ```json
 {
   "config": {
+    "_version": 2,
     "_node": {
       "awaitTick": 5 // The delay (in ticks) to wait after luckperms recalculates the holder's permissions.
+    },
+    "companion": {
+      "visibility": "VANILLA" // VANILLA - Default nametag handling;
+                              // ALWAYS - Always show overriden nametag;
+                              // EXCLUDE_OWN - Only show overriden nametag for other players.
     },
     "display": {
       "chat": {

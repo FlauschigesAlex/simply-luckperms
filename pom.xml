@@ -6,10 +6,10 @@
 
     <groupId>at.flauschigesalex.lucko</groupId>
     <artifactId>simply-luckperms</artifactId>
-    <version>1.5.0</version>
+    <version>1.6.0-b.1</version>
 
     <properties>
-        <kotlin.version>2.4.10</kotlin.version>
+        <kotlin.version>2.4.20</kotlin.version>
         <java.version>21</java.version>
     </properties>
     
@@ -66,17 +66,22 @@
         <dependency>
             <groupId>at.flauschigesalex.lib.base</groupId>
             <artifactId>default-general</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>at.flauschigesalex.lib.base</groupId>
+            <artifactId>default-cache</artifactId>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>at.flauschigesalex.lib.base</groupId>
             <artifactId>default-file</artifactId>
-            <version>3.1.1</version>
+            <version>3.1.2</version>
         </dependency>
         <dependency>
             <groupId>at.flauschigesalex.lib.minecraft.paper</groupId>
             <artifactId>minecraft-paper-base</artifactId>
-            <version>3.2.1</version>
+            <version>3.2.3</version>
         </dependency>
         
         <!-- RINTH -->
@@ -96,15 +101,35 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
+
+                <configuration>
+                    <compilerPlugins>
+                        <plugin>kotlinx-serialization</plugin>
+                    </compilerPlugins>
+                    <args>
+                        <arg>-Xcompanion-blocks-and-extensions</arg>
+                        <arg>-opt-in=kotlinx.serialization.ExperimentalSerializationApi</arg>
+                    </args>
+                </configuration>
+
                 <executions>
                     <execution>
                         <id>compile</id>
-                        <phase>process-sources</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-serialization</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+                
             </plugin>
             
             <plugin>

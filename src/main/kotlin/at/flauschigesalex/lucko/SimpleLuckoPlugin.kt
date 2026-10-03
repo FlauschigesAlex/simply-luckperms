@@ -1,6 +1,7 @@
 package at.flauschigesalex.lucko
 
 import at.flauschigesalex.lib.minecraft.paper.base.FlauschigeLibraryPaper
+import at.flauschigesalex.lucko.config.SimpleLuckoConfig
 import at.flauschigesalex.lucko.luckperms.LuckPermsEvents
 import at.flauschigesalex.lucko.utils.Commons
 import at.flauschigesalex.lucko.utils.scheduleAsync
@@ -10,6 +11,7 @@ import at.flauschigesalex.rinth.project.version.onChanges
 import at.flauschigesalex.rinth.utils.checker.version.VersionChecker
 import org.bstats.bukkit.Metrics
 import org.bstats.charts.AdvancedPie
+import org.bstats.charts.SimplePie
 import org.bukkit.plugin.java.JavaPlugin
 
 @Suppress("UNUSED_EXPRESSION")
@@ -42,6 +44,10 @@ internal class SimpleLuckoPlugin : JavaPlugin() {
                 if (SimpleLuckoConfig.useScoreboardPrefix) put("ScoreboardPrefix", 1)
                 if (SimpleLuckoConfig.useScoreboardSuffix) put("ScoreboardSuffix", 1)
             }
+        })
+
+        metrics.addCustomChart(SimplePie("PlayerCompanionVisibility") {
+            SimpleLuckoConfig.companionVisibility.name
         })
 
         // BEGIN VERSION CHECKER

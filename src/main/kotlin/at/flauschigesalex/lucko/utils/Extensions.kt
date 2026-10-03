@@ -4,7 +4,10 @@ package at.flauschigesalex.lucko.utils
 
 import at.flauschigesalex.lucko.SimpleLuckoPlugin
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import org.bukkit.scoreboard.Scoreboard
+import kotlin.uuid.Uuid
+import kotlin.uuid.toKotlinUuid
 import net.kyori.adventure.text.minimessage.MiniMessage as MM
 
 internal val MiniMessage = MM.miniMessage()
@@ -22,3 +25,6 @@ val Scoreboard.isMainScoreboard: Boolean
  */
 val Scoreboard.isPrivateScoreboard: Boolean
     get() = this.isMainScoreboard.not()
+
+val Player.uuid: Uuid
+    get() = this.uniqueId.toKotlinUuid()

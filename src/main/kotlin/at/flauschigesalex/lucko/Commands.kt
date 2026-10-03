@@ -3,6 +3,7 @@ package at.flauschigesalex.lucko
 import at.flauschigesalex.lib.minecraft.brigadier.CommandBuilder
 import at.flauschigesalex.lib.minecraft.brigadier.types.internal.LiteralArgumentType
 import at.flauschigesalex.lib.minecraft.brigadier.types.primitive.EnumArgumentType
+import at.flauschigesalex.lucko.config.SimpleLuckoConfig
 import at.flauschigesalex.lucko.luckperms.LuckPermsAPI
 import at.flauschigesalex.lucko.luckperms._events.UpdateField
 import at.flauschigesalex.lucko.utils.Permissions
@@ -20,7 +21,7 @@ internal object Commands {
                 
                 this.execute { context ->
                     val sender = context.sender
-                    
+
                     SimpleLuckoConfig.reloadConfig()
                     LuckPermsAPI.attemptUpdateEverything()
                     
